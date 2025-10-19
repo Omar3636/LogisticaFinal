@@ -7,7 +7,7 @@ def generar_reporte_excel(envios, nombre_archivo=None):
         nombre_archivo = f"reporte_envios_{fecha}.xlsx"
 
     # Convertir objetos Envio a diccionarios
-    datos = [envio.to_dict() for envio in envios]
+    datos = [envio.a_dicc() for envio in envios]
 
     # Crear DataFrame o encuadramiento de datos.
     df = pd.DataFrame(datos)

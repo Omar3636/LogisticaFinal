@@ -9,13 +9,12 @@ class Envio:
         self.estado = estado
         self.numero_seguimiento = numero_seguimiento
         self.fecha_entrega = fecha_entrega
-
         if fecha_ingreso is None:
             self.fecha_ingreso = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         else:
             self.fecha_ingreso = fecha_ingreso
 
-    def to_dict(self):
+    def a_dicc(self):
         # Convierte el envío a diccionario para la base de datos
         return {
             'id': self.id,
@@ -29,7 +28,7 @@ class Envio:
         }
 
     @classmethod
-    def from_dict(cls, data):
+    def desde_dicc(cls, data):
         # Crea un Envio desde un diccionario (desde base de datos)
         return cls(
             id=data.get('id'),

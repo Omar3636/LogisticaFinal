@@ -22,7 +22,7 @@ def agregar_bd(envio):
                 INSERT INTO envios (proveedor, cliente, destino, estado, numero_seguimiento, fecha_entrega, fecha_ingreso)\
                 VALUES (%(proveedor)s, %(cliente)s, %(destino)s, %(estado)s, %(numero_seguimiento)s, %(fecha_entrega)s, %(fecha_ingreso)s)
                 """
-        valores = envio.to_dict()
+        valores = envio.a_dicc()
         cursor.execute(query, valores)
         conexion.commit()
         print("Se ha agregado el registro con éxito en la base de datos.")
@@ -42,7 +42,7 @@ def buscar_bd(id):
         cursor.execute(query, (id,))
         envio_dicc = cursor.fetchone()
         if envio_dicc:
-            return Envio.from_dict(envio_dicc)  # ← Convertir a objeto Envio
+            return Envio.desde_dicc(envio_dicc)  # ← Convertir a objeto Envio
         else:
             return None
     except Exception as e:
@@ -81,7 +81,7 @@ def actualizar_bd(envio):
                     fecha_entrega = %(fecha_entrega)s \
                 WHERE id = %(id)s
                 """
-        valores = envio.to_dict()
+        valores = envio.a_dicc()
         cursor.execute(query, valores)
         conexion.commit()
 
@@ -108,7 +108,7 @@ def mostrar_todo_bd():
             # Crear diccionario con nombres de columnas
             envio_dict = dict(zip(column_names, fila))
             # Convertir a objeto Envio
-            envio = Envio.from_dict(envio_dict)
+            envio = Envio.desde_dicc(envio_dict)
             lista_envios.append(envio)
 
         return lista_envios

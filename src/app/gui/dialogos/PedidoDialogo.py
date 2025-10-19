@@ -30,7 +30,7 @@ class PedidoDialogo:
         # Obtener datos del envío existente o crear diccionario vacío
         if self.envio_existente:
             # Si es un objeto Envio, convertir a diccionario
-            datos = self.envio_existente.to_dict()
+            datos = self.envio_existente.a_dicc()
         else:
             datos = {}
 
